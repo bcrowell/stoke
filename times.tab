@@ -1,2 +1,125 @@
+#============ 2018 ==============
+
+#-----jan 2018 -----
+lake,2018 jan 1,48:06
+b2,2018 jan 6,2:13
+casolero,2018 jan 8,2:02:03
+hill,2018 jan 22,1:14
+chili,2018 jan 27,1:26:10
+hill,2018 jan 30,1:10:42
+
+#----- feb 2018 -----
+b2,2018 feb 2,2:05:43
+lake,2018 feb 9,47:50
+chili,2018 feb 17,1:28
+hill,2018 feb 19,1:10:08
+
+#----- mar 2018 -----
+casolero,2018 mar 3,1:59:31
+hill,2018 mar 6,1:09:27
+chino_hills_half,2018 mar 10,1:50:18
+400,2018 mar 13,1:28
+mile,2018 mar 13,6:37
+lake,2018 mar 16,47:21
+lake,2018 mar 17,46:52
+lake,2018 mar 18,46:50
+chili,2018 mar 24,1:24:57
+wilson,2018 mar 27,1:52:42
+b2,2018 mar 29,2:04:22
+
+#----- apr 2018 -----
+wilson,2018 apr 6,1:49:38
+wilson,2018 apr 13,1:48:32
+b2,2018 apr 15,2:04:38
+wilson,2018 apr 22,1:59
+
+#----- may 2018 -----
+vivian,2018 may 4,2:31 # snow
+b2,2018 may 6,2:14
+wilson,2018 may 11,1:54
+
+#----- jun 2018 -----
+south_fork,2018 jun 3,2:49
+lake,2018 jun 15,57:14
+tunnel,2018 jun 17,1:52:48
+tunnel,2018 jun 21,1:52:47
+tunnel,2018 jun 24,1:46:09
+lake,2018 jun 28,48:39
+
+#----- jul 2018 -----
+half,2018 jul 1,1:46:27
+lake,2018 jul 4,47:33
+south_fork,2018 jul 5,2:51:49
+lake,2018 jul 7,47:49
+south_fork,2018 jul 13,2:37:06
+tunnel,2018 jul 16,1:55
+tunnel,2018 jul 18,1:53:40
+tunnel,2018 jul 23,1:52:57
+b2,2018 jul 26,2:20
+baldy,2018 jul 30,1:35
+
+#----- aug 2018 -----
+3t,2018 aug 2,6:48
+3t,2018 aug 5,5:40:08
+3t,2018 aug 8,5:34
+3t,2018 aug 12,5:30:38
+b2,2018 aug 26,2:21
+
+#----- sep 2018 -----
+b2,2018 sep 3,2:17
+b2,2018 sep 21,2:16
+b2,2018 sep 29,2:13
+
+#----- oct 2018 -----
+half,2018 oct 5,2:00    # acute injury
+
+#----- nov 2018 -----
+tunnel,2018 nov 23,1:56
+casolero,2018 nov 30,2:23
+
+#----- dec 2018 -----
+tunnel,2018 dec 9,1:52:06
+tunnel,2018 dec 12,1:49:34
+tunnel,2018 dec 15,1:48:00
+b2,2018 dec 17,2:10:35
+tunnel,2018 dec 20,1:45:39
+tunnel,2018 dec 22,1:44:42
+wilson,2018 dec 26,2:11
+
+#============ 2019 ==============
+
+#----- jan 2019 ------
 wilson,2019 jan 1,2:01
+casolero,2019 jan 6,2:00:06
+lake,2019 jan 8,47:54
+wilson,2019 jan 9,2:07
+hill,2019 jan 20,1:18
+
+#----- feb 2019 -----
+lake,2019 feb 24,50:05
+lake,2019 feb 27,49:09
+
+#----- mar 2019 -----
+casolero,2019 mar 3,2:11
+b2,2019 mar 9,2:18      # wading
+b2,2019 mar 13,2:14:39  # wading
+lake,2019 mar 15,49:07
+b2,2019 mar 18,2:10:27  # wading
+lake,2019 mar 24,49:03
+b2,2019 mar 25,2:13:20  # wading
+b2,2019 mar 31,2:07:47
+
+#-----apr 2019 -----
+lake,2019 apr 2,47:56
+lake,2019 apr 5,47:28
+b2,2019 apr 7,2:09:11
+great,2019 apr 18,1:10:59
+great,2019 apr 19,1:10:43
+lake,2019 apr 22,50:31
+
+#-----may 2019 -----
+wilson,2019 may 3,2:02
+wilson,2019 may 6,1:55:27
+400,2019 may 10,1:26
+mile,2019 may 10,6:43
 
