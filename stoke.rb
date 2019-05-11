@@ -11,7 +11,7 @@ def main
     miles,cf = routes[name]
     energy = miles_to_energy(miles,cf) # energy in units of marathons
     power = time_to_mk(energy,minutes) # power in millikipchoges
-    print "energy=#{energy}, power=#{power}\n"
+    print "#{name}, #{date}, energy=#{energy}, power=#{power}\n"
   }
 end
 
