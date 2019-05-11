@@ -2,14 +2,26 @@
 
 require 'date'
 
-#[["400", 0.249, 0.0, {}], ["mile", 1.0, 0.0, {}], ["lake", 5.72, 3.4, {}], ["great", 8.31, 3.5, {}], ["casolero", 14.12, 4.1, {}], ["hill", 8.39, 3.8, {}], ["b2", 14.48, 3.8, {}], ["tunnel", 12.88, 1.8, {}], ["wilson", 6.62, 58.1, {}], ["3t", 17.06, 34.8, {}], ["vivian", 9.04, 48.3, {}], ["south_fork", 9.43, 41.2, {}]]
-#[["wilson", #<Date: 2019-01-01 ((2458485j,0s,0n),+0s,2299161j)>, 121, {}]]
-
-
 def main
   routes,times = read_data()
   print routes,"\n"
   print times,"\n"
+  times.each { |time|
+    name,date,minutes = time
+    miles,cf = routes[name]
+    energy = miles_to_energy(miles,cf) # energy in units of marathons
+    power = time_to_mk(energy,minutes) # power in millikipchoges
+    print "energy=#{energy}, power=#{power}\n"
+  }
+end
+
+def miles_to_energy(miles,cf) # returns energy in units of marathons
+  return (miles/marathon())*(1.0+cf/(100.0-cf))
+end
+
+def time_to_mk(energy,minutes) # returns power in units of millikipchoges, where 1 kipchoge is the energy to run 1 marathon in 2 hours
+  # input energy is in units of marathons
+  return 1000.0*energy/(minutes/120.0)
 end
 
 # {"400"=>[0.249, 0.0, {}], "mile"=>[1.0, 0.0, {}], "lake"=>[5.72, 3.4, {}], "great"=>[8.31, 3.5, {}], "casolero"=>[14.12, 4.1, {}], "hill"=>[8.39, 3.8, {}], "b2"=>[14.48, 3.8, {}], "tunnel"=>[12.88, 1.8, {}], "wilson"=>[6.62, 58.1, {}], "3t"=>[17.06, 34.8, {}], "vivian"=>[9.04, 48.3, {}], "south_fork"=>[9.43, 41.2, {}]}
@@ -97,6 +109,10 @@ def to_type(s,t)
   end
   # fall through to default, do nothing to the string
   return s
+end
+
+def marathon
+  return 26.219 # length of marathon, in miles
 end
 
 main
