@@ -1,0 +1,2 @@
+default:
+	./stoke.rb
