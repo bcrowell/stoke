@@ -8,11 +8,26 @@ def main
 
   # print_all(pr,routes,times)
 
-  csv = csv_report(pr,routes,times)
+  csv = csv_report_one_route(pr,routes,times,"lake")
   File.open("stoke.csv",'w') { |f|
     f.print csv
   }
 
+end
+
+def csv_report_one_route(pr,routes,times,selected_route)
+  csv = ''
+  times.each { |x|
+    route,date,minutes = x
+    if route!=selected_route then next end
+    yr = date_to_year_and_frac(date)
+    row = []
+    row.push(("%8.3f" % [yr.to_s]))
+    energy,power = energy_and_power(routes,selected_route,minutes)
+    row.push(("%3d" % [power]))
+    csv = csv + row.join(',') + "\n"
+  }
+  return csv
 end
 
 def csv_report(pr,routes,times)
