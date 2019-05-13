@@ -5,19 +5,40 @@ require 'date'
 def main
   routes,times = read_data()
   pr,routes,times = process_data(routes,times)
-  print_all(pr,routes,times)
-  csv_report(pr,routes,times)
+
+  # print_all(pr,routes,times)
+
+  csv = csv_report(pr,routes,times)
+  File.open("stoke.csv",'w') { |f|
+    f.print csv
+  }
+
 end
 
 def csv_report(pr,routes,times)
+  csv = routes.keys.unshift('date').join(',')+"\n"
+  times.each { |x|
+    route,date,minutes = x
+    yr = date_to_year_and_frac(date)
+    row = []
+    row.push(("%8.3f" % [yr.to_s]))
+    routes.keys.each { |name|
+      if route==name then
+        energy,power = energy_and_power(routes,name,minutes)
+        row.push("%3d" % [power])
+      else
+        row.push('')
+      end
+    }
+    csv = csv + row.join(',') + "\n"
+  }
+  return csv
 end
 
 def print_all(pr,routes,times)
   times.each { |time|
     name,date,minutes = time
-    miles,cf = routes[name]
-    energy = miles_to_energy(miles,cf) # energy in units of marathons
-    power = time_to_mk(energy,minutes) # power in millikipchoges
+    energy,power = energy_and_power(routes,name,minutes)
     is_pr = (pr[name][0]==date)
     if is_pr then
       suffix = "*"
@@ -28,6 +49,12 @@ def print_all(pr,routes,times)
   }
 end
 
+def energy_and_power(routes,name,minutes)
+  miles,cf = routes[name]
+  energy = miles_to_energy(miles,cf) # energy in units of marathons
+  power = time_to_mk(energy,minutes) # power in millikipchoges
+  return [energy,power]
+end
 
 def process_data(routes,times)
   pr = {}
@@ -148,6 +175,12 @@ end
 def time_to_mk(energy,minutes) # returns power in units of millikipchoges, where 1 kipchoge is the energy to run 1 marathon in 2 hours
   # input energy is in units of marathons
   return 1000.0*energy/(minutes/120.0)
+end
+
+def date_to_year_and_frac(date)
+  jd = date.mjd-Date.parse('2000 jan 1').mjd; # days since turn of the century
+  y = 2000+(jd.to_f/365.25) # sloppy way of calculating what is very nearly the year plus fraction of a year
+  return y  
 end
 
 main
