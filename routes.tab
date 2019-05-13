@@ -1,5 +1,7 @@
 400,0.249,0        # 400 meters
 mile,1.0,0         # mile
+half,13.1,0        # any flat half-marathon such as ABW
+marathon,26.2,0    # any flat marathon
 
 lake,5.72,3.4
 great,8.31,3.5     # "greatest hits," high school, Fullerton loop, fire station (low road), no detour to park
@@ -10,7 +12,6 @@ tunnel,12.88,1.8   # flat half marathon from my house
 
 chili,10.0,7.5               # 2018 route; their distance (I get 9.73 mi)
 chino_hills_half,13.1,7.4    # their distance (I get 12.5 mi)
-half,13.1,0                  # any flat half-marathon such as ABW
 
 baldy,3.10,73.8       # kcals thinks 4205' gain, which seems high
 wilson,6.62,58.1      # uphill only
