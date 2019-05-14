@@ -8,14 +8,15 @@ def main
 
   # print_all(pr,routes,times)
 
-  csv = csv_report_one_route(pr,routes,times,"lake")
-  File.open("stoke.csv",'w') { |f|
-    f.print csv
-  }
+  if false then
+    csv_report_one_route("stoke.csv",pr,routes,times,"wilson")
+  end
+
+  graph_all_routes("stoke.svg",pr,routes,times)
 
 end
 
-def csv_report_one_route(pr,routes,times,selected_route)
+def csv_report_one_route(csv_file,pr,routes,times,selected_route)
   csv = ''
   times.each { |x|
     route,date,minutes = x
@@ -27,27 +28,44 @@ def csv_report_one_route(pr,routes,times,selected_route)
     row.push(("%3d" % [power]))
     csv = csv + row.join(',') + "\n"
   }
-  return csv
+  File.open(csv_file,'w') { |f|
+    f.print csv
+  }
 end
 
-def csv_report(pr,routes,times)
-  csv = routes.keys.unshift('date').join(',')+"\n"
-  times.each { |x|
-    route,date,minutes = x
-    yr = date_to_year_and_frac(date)
-    row = []
-    row.push(("%8.3f" % [yr.to_s]))
-    routes.keys.each { |name|
-      if route==name then
+def graph_all_routes(svg_file,pr,routes,times)
+  r = ''
+  v = [] # names of variables holding routes
+  t_var = [] # ... and times
+  routes.keys.each { |name|
+    if name=~/\A[a-zA-Z]/ then var_name=name else var_name="v_"+name end # for routes like "400", make an array called "v_400"
+    t_var_name = "t_"+name
+    v.push(var_name)
+    t_var.push(t_var_name)
+    t = []
+    a = []
+    times.each { |x|
+      route_raw,date,minutes = x
+      if route_raw==name then
         energy,power = energy_and_power(routes,name,minutes)
-        row.push("%3d" % [power])
-      else
-        row.push('')
+        t.push("%8.3f" % [date_to_year_and_frac(date)])
+        a.push("%3d" % [power])
       end
     }
-    csv = csv + row.join(',') + "\n"
+    r = r + t_var_name + ' <- c(' +t.join(',')+')'+"\n"
+    r = r +   var_name + ' <- c(' +a.join(',')+')'+"\n"
   }
-  return csv
+  r = r + "plot(#{t_var[0]},#{v[0]},type=\"n\")\n" # empty frame and axes
+  i = 0
+  v.each { |var_name|
+    r = r + "lines(#{t_var[i]},#{var_name})\n"
+    i=i+1
+  }
+  r_file = "temp.r"
+  File.open(r_file,'w') { |f|
+    f.print r
+  }
+  system("R --quiet --slave --no-save --no-restore-data <#{r_file}")
 end
 
 def print_all(pr,routes,times)
