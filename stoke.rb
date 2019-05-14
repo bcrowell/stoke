@@ -6,7 +6,7 @@ def main
   routes,times = read_data()
   pr,routes,times = process_data(routes,times)
 
-  # print_all(pr,routes,times)
+  print_all(pr,routes,times)
 
   if false then
     csv_report_one_route("stoke.csv",pr,routes,times,"wilson")
