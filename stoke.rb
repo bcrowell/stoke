@@ -37,6 +37,10 @@ def graph_all_routes(svg_file,pr,routes,times)
   r = ''
   v = [] # names of variables holding routes
   t_var = [] # ... and times
+  min_t = 9999.9
+  max_t = -9999.9
+  min_y = 9999.9
+  max_y = -9999.9
   routes.keys.each { |name|
     if name=~/\A[a-zA-Z]/ then var_name=name else var_name="v_"+name end # for routes like "400", make an array called "v_400"
     t_var_name = "t_"+name
@@ -48,14 +52,19 @@ def graph_all_routes(svg_file,pr,routes,times)
       route_raw,date,minutes = x
       if route_raw==name then
         energy,power = energy_and_power(routes,name,minutes)
-        t.push("%8.3f" % [date_to_year_and_frac(date)])
+        yr = date_to_year_and_frac(date)
+        t.push("%8.3f" % [yr])
         a.push("%3d" % [power])
+        if yr<min_t then min_t = yr end
+        if yr>max_t then max_t = yr end
+        if power<min_y then min_y = power end
+        if power>max_y then max_y = power end
       end
     }
     r = r + t_var_name + ' <- c(' +t.join(',')+')'+"\n"
     r = r +   var_name + ' <- c(' +a.join(',')+')'+"\n"
   }
-  r = r + "plot(#{t_var[0]},#{v[0]},type=\"n\")\n" # empty frame and axes
+  r = r + "plot(c(#{min_t},#{max_t}),c(#{min_y},#{max_y}),type=\"n\")\n" # empty frame and axes
   i = 0
   v.each { |var_name|
     r = r + "lines(#{t_var[i]},#{var_name})\n"
