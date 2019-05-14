@@ -12,7 +12,7 @@ def main
     csv_report_one_route("stoke.csv",pr,routes,times,"wilson")
   end
 
-  graph_all_routes("stoke.svg",pr,routes,times)
+  graph_all_routes("stoke.pdf",pr,routes,times)
 
 end
 
@@ -33,15 +33,17 @@ def csv_report_one_route(csv_file,pr,routes,times,selected_route)
   }
 end
 
-def graph_all_routes(svg_file,pr,routes,times)
-  r = ''
+def graph_all_routes(pdf_file,pr,routes,times)
+  r = "pdf(\"#{pdf_file}\")\n"
   v = [] # names of variables holding routes
   t_var = [] # ... and times
   min_t = 9999.9
   max_t = -9999.9
   min_y = 9999.9
   max_y = -9999.9
+  route_type = []
   routes.keys.each { |name|
+    route_type.push(find_route_type(routes,name))
     if name=~/\A[a-zA-Z]/ then var_name=name else var_name="v_"+name end # for routes like "400", make an array called "v_400"
     t_var_name = "t_"+name
     v.push(var_name)
@@ -64,12 +66,13 @@ def graph_all_routes(svg_file,pr,routes,times)
     r = r + t_var_name + ' <- c(' +t.join(',')+')'+"\n"
     r = r +   var_name + ' <- c(' +a.join(',')+')'+"\n"
   }
-  r = r + "plot(c(#{min_t},#{max_t}),c(#{min_y},#{max_y}),type=\"n\")\n" # empty frame and axes
+  r = r + "plot(c(#{min_t},#{max_t}),c(#{min_y},#{max_y}),type=\"n\",xlab=\"date\",ylab=\"power (millikipchoge)\")\n" # empty frame and axes
   i = 0
   v.each { |var_name|
-    r = r + "lines(#{t_var[i]},#{var_name})\n"
+    r = r + "lines(#{t_var[i]},#{var_name},col=#{route_type_to_color(route_type[i])})\n"
     i=i+1
   }
+  r = r + "dev.off()\n"
   r_file = "temp.r"
   File.open(r_file,'w') { |f|
     f.print r
@@ -89,6 +92,30 @@ def print_all(pr,routes,times)
     end
     print "#{"%-20s" % [name]} #{date}, energy=#{"%5.3f" % [energy]}, power=#{"%3d" % [power]} #{suffix}\n"
   }
+end
+
+def find_route_type(routes,name)
+  miles,cf = routes[name]
+  if miles<=8.5 && cf>1 && cf<10.0 then return "short_trail" end
+  if miles>8.5 && cf>1 && cf<10.0 then return "long_trail" end
+  if miles<=1.0 then return "sprint" end
+  if miles<=13.5 && cf<1 then return "short_road" end
+  if miles>13.5 && cf<1 then return "long_road" end
+  if cf>10 then return "mountain" end
+  return "misc"
+end
+
+# color palette for R
+# 1= "black"   "red"     "green3"  "blue"    "cyan"    "magenta" "yellow"  "gray"   
+
+def route_type_to_color(t)
+  if t=="sprint" then return 2 end
+  if t=="short_trail" then return 3 end
+  if t=="long_trail" then return 4 end
+  if t=="mountain" then return 1 end
+  if t=="short_road" then return 5 end
+  if t=="long_road" then return 6 end
+  if t=="misc" then return 7 end
 end
 
 def energy_and_power(routes,name,minutes)
