@@ -8,17 +8,28 @@ great,8.31,3.5     # "greatest hits," high school, Fullerton loop, fire station 
 long,9.19,4.0
 casolero,14.12,4.1
 hill,8.39,3.8
+hill2,10.60,3.4
 b2,14.48,3.8       # my normal version of the butterfly run
 tunnel,12.88,1.8   # flat half marathon from my house
+biggus_loopus,16.8,3.1 # version from 2020 april 3; this exact route only works during covid epidemic, would have to be modified once it's over
 
 chili,10.0,7.5               # 2018 route; their distance (I get 9.73 mi)
 chino_hills_half,13.1,7.4    # their distance (I get 12.5 mi)
 
-baldy,3.10,73.8       # kcals thinks 4205' gain, which seems high
-wilson,6.62,58.1      # uphill only
-3t,17.06,34.8         # Baldy and 3 T's, clockwise, from Icehouse Canyon
-vivian,9.04,48.3      # San G from Vivian Creek, uphill only
-south_fork,9.43,41.2  # San G from South Fork, uphill only
+#----------- In the following routes, using kcals with filtering=60 m seems to give unrealistically high CFs.
+# E.g., for Wilson:
+#     Kcals claims CF=58.1, and this results in power being higher than for lake, which isn't believable, since it's
+#     more than double the energy expenditure.
+#     For a uniform climb of 1435 m over 10412 m horizontally, CF=49.6%, so it must be at least that high.
+#     Kcals with filtering=200 m gives CF=52.8%.
+# So did all of these as:
+#     force_dem=1 filtering=200
 
-
-
+baldy,3.10,73.0
+wilson,6.62,52.8      # ... uphill only
+3t,17.06,29.7         # Baldy and 3 T's, clockwise, from Icehouse Canyon
+deer_springs,8.1,48  # uphill only, to junction below the summit
+vivian,9.04,46.5      # San G from Vivian Creek, uphill only
+south_fork,9.43,39.7  # San G from South Fork, uphill only
+angelus,15.91,34.2      # San G from Angelus Oaks, uphill only
+high_meadows,11.8,36.7 # Angelus Oaks to High Meadows junction, uphill only

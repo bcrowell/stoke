@@ -8,11 +8,15 @@ def main
 
   print_all(pr,routes,times)
 
-  if false then
-    csv_report_one_route("stoke.csv",pr,routes,times,"wilson")
+  if true then
+    csv_report_one_route("stoke.csv",pr,routes,times,"vivian")
+    # This doesn't get graphed, just produces the csv file.
   end
 
-  graph_all_routes("stoke.pdf",pr,routes,times)
+  eps = 1.0/300.0 # slightly more than one day
+  start_rel = -2.0 # only go back to this number of years before today; -2.0 works well
+  end_rel = 0.0+eps
+  graph_all_routes('pdf',"stoke",pr,routes,times,start_rel,end_rel)
 
 end
 
@@ -33,14 +37,17 @@ def csv_report_one_route(csv_file,pr,routes,times,selected_route)
   }
 end
 
-def graph_all_routes(pdf_file,pr,routes,times)
-  r = "pdf(\"#{pdf_file}\")\n"
+def graph_all_routes(file_format,file_stem,pr,routes,times,start_rel,end_rel)
+  # file format can be svg or pdf
+  filename = file_stem + "." + file_format
+  r = "#{file_format}(\"#{filename}\")\n"
   v = [] # names of variables holding routes
   t_var = [] # ... and times
   min_t = 9999.9
   max_t = -9999.9
   min_y = 9999.9
   max_y = -9999.9
+  today = date_to_year_and_frac(Date.today)
   route_type = []
   routes.keys.each { |name|
     route_type.push(find_route_type(routes,name))
@@ -55,6 +62,8 @@ def graph_all_routes(pdf_file,pr,routes,times)
       if route_raw==name then
         energy,power = energy_and_power(routes,name,minutes)
         yr = date_to_year_and_frac(date)
+        if t.length>0 and t[-1].to_f>yr then die("times out of order, #{date}") end
+        if yr<today+start_rel or yr>today+end_rel then next end # qwe
         t.push("%8.3f" % [yr])
         a.push("%3d" % [power])
         if yr<min_t then min_t = yr end
@@ -68,16 +77,32 @@ def graph_all_routes(pdf_file,pr,routes,times)
   }
   r = r + "plot(c(#{min_t},#{max_t}),c(#{min_y},#{max_y}),type=\"n\",xlab=\"date\",ylab=\"power (millikipchoge)\")\n" # empty frame and axes
   i = 0
+  count_routes_of_type = {}
+  dash_types = ['',  ',lty="42"',  ',lty="11"',  ',lty="4121"']
+  dash_type_description = ['____',  '- - ',  '....',  '-.-.']
   v.each { |var_name|
-    r = r + "lines(#{t_var[i]},#{var_name},col=#{route_type_to_color(route_type[i])})\n"
+    rt = route_type[i]
+    if !(count_routes_of_type.has_key?(rt)) then count_routes_of_type[rt]=0 end
+    count_routes_of_type[rt] = count_routes_of_type[rt]+1
+    dashes = ''
+    dash_description = '____'
+    if count_routes_of_type[rt]<=4 then
+      dashes = dash_types[count_routes_of_type[rt]-1]
+      dash_description = dash_type_description[count_routes_of_type[rt]-1]
+    end
+    color = route_type_to_color(rt)
+    r = r + "lines(#{t_var[i]},#{var_name},col=#{color} #{dashes})\n"
+    r = r + "points(#{t_var[i]},#{var_name},col=#{color})\n"
+    print("#{var_name} #{color_description(color)} #{dash_description}\n")
     i=i+1
   }
-  r = r + "dev.off()\n"
+  r = r + "garbage <- dev.off()\n" # https://stackoverflow.com/a/750710/1142217
   r_file = "temp.r"
   File.open(r_file,'w') { |f|
     f.print r
   }
   system("R --quiet --slave --no-save --no-restore-data <#{r_file}")
+  print "Wrote #{filename}\n"
 end
 
 def print_all(pr,routes,times)
@@ -95,18 +120,22 @@ def print_all(pr,routes,times)
 end
 
 def find_route_type(routes,name)
+  flat_cf = 2.0 # tunnel is 1.8
   miles,cf = routes[name]
-  if miles<=8.5 && cf>1 && cf<10.0 then return "short_trail" end
-  if miles>8.5 && cf>1 && cf<10.0 then return "long_trail" end
+  if miles<=8.5 && cf>flat_cf && cf<10.0 then return "short_trail" end
+  if miles>8.5 && cf>flat_cf && cf<10.0 then return "long_trail" end
   if miles<=1.0 then return "sprint" end
-  if miles<=13.5 && cf<1 then return "short_road" end
-  if miles>13.5 && cf<1 then return "long_road" end
+  if miles<=13.5 && cf<flat_cf then return "short_road" end
+  if miles>13.5 && cf<flat_cf then return "long_road" end
   if cf>10 then return "mountain" end
   return "misc"
 end
 
-# color palette for R
-# 1= "black"   "red"     "green3"  "blue"    "cyan"    "magenta" "yellow"  "gray"   
+# default color palette for R
+# 1= "black"   "red"     "green"  "blue"    "cyan"    "magenta" "yellow"  "gray"   
+def color_description(color)
+  return [nil,"black",  "red",    "green", "blue",   "cyan",   "magenta", "yellow", "gray"][color]
+end
 
 def route_type_to_color(t)
   if t=="sprint" then return 2 end

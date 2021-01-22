@@ -45,8 +45,8 @@ lake,jun 27,49:13
 
 b2,jul 4,2:04:23
 
-b2,aug 19,2:07
-b2,aug 13,2:08
+b2,aug 13,2:07
+b2,aug 19,2:08
 
 b2,sep 6,2:14
 
@@ -160,7 +160,7 @@ vivian,jul 27,2:18:40
 lake,aug 17,48:25
 
 #----- sep 2017 -----
-b2,sep 29,2:24 # ... check this; I originally entered it as 1:24??
+b2,sep 29,2:24
 lake,sep 30,49:25
 
 #----- oct 2017 -----
@@ -310,4 +310,146 @@ wilson,may 6,1:55:27
 400,may 10,1:26
 mile,may 10,6:43
 great,may 11,1:12:48
+wilson,may 12,2:06
+lake,may 13,48:21
+lake,may 15,47:50
+b2,may 24,2:12:34
 
+#-----jun 2019-----
+tunnel,jun 9,1:59
+tunnel,jun 11,1:52:37
+tunnel,jun 13,1:48:37
+tunnel,jun 15,1:49:10
+
+#-----jul 2019-----
+lake,jul 4,53
+lake,jul 17,51
+lake,jul 31,53
+
+#-----aug 2019-----
+lake,aug 6,51
+lake,aug 11,53
+great,aug 14,1:16
+b2,aug 20,2:18
+lake,aug 22,50:01
+great,aug 25,1:14:37
+
+
+#-----sep 2019-----
+vivian,aug 30,2:53
+tunnel,sep 1,1:55:32
+vivian,sep 6,2:36:27
+vivian,sep 13,2:40:23
+
+#-----oct 2019-----
+b2,oct 4,2:16:20
+south_fork,oct 11,3:05
+tunnel,oct 13,1:48:21
+lake,oct 25,53:29
+
+#-----nov 2019-----
+lake,nov 1,49:40
+lake,nov 8,48:49
+b2,nov 22,2:21
+casolero,nov 30,2:10:59
+
+#-----dec 2019-----
+hill2,dec 7,1:41:20
+hill2,dec 13,1:33:29
+hill2,dec 15,1:30:21
+b2,dec 20,2:09:23
+tunnel,dec 24,1:50:04
+half,dec 28,1:42:39
+
+#-----jan 2020-----
+lake,2020 jan 6,48:20
+wilson,jan 8,2:08:29
+lake,jan 10,47:12
+wilson,jan 15,1:59:57
+half,jan 18,1:43:42
+lake,jan 24,48:10
+lake,jan 25,46:18
+b2,jan 31,2:08:50
+
+#-----feb 2020----
+b2,feb 2,2:04:16
+lake,feb 16,52:29
+lake,feb 17,51:06
+lake,feb 20,47:57
+b2,feb 21,2:21
+lake,feb 25,49:03
+lake,feb 27,47:51
+tunnel,feb 29,1:47:35
+
+#-----mar 2020----
+lake,mar 1,49:54
+tunnel,mar 8,1:44:36
+b2,mar 18,2:19
+biggus_loopus,mar 20,2:49
+lake,mar 22,47:44
+lake,mar 24,47:26
+tunnel,mar 27,1:44:19
+lake,mar 30,50:09
+
+#-----apr 2020----
+biggus_loopus,apr 3,2:34:01
+lake,apr 5,47:40
+biggus_loopus,apr 11,2:31:00 # -- gate at lake locked today, but open again later in the month
+lake,apr 14,48:11
+lake,apr 16,47:33
+lake,apr 22,47:07
+lake,apr 24,46:25
+
+#----may 2020----
+biggus_loopus,may 8,2:43 # -- golfers back on golf course, this may be the last time I do this run
+lake,may 10,50:07
+lake,may 17,48:52
+lake,may 19,48:08
+deer_springs,may 22,2:54
+lake,may 25,48:51
+deer_springs,may 29,2:48
+
+#----jun 2020----
+lake,jun 1,49:29
+deer_springs,jun 2,2:41:18
+lake,jun 7,48:49
+angelus,jun 10,5:46
+tunnel,jun 13,1:45:02
+high_meadows,jun 16,3:43:03
+b2,jun 25,2:10:39
+
+#----jul 2020----
+vivian,jul 1,2:40:34
+b2,jul 5,2:05:41
+vivian,jul 8,2:37
+
+# hamstring strain and broken wrist
+
+#----sep 2020----
+b2,sep 7,2:45
+
+#----oct 2020----
+lake,oct 10,1:00:00
+lake,oct 17,56:34
+
+#----nov 2020----
+lake,nov 11,53:29
+lake,nov 23,51:32
+
+#----dec 2020----
+tunnel,dec 2,2:08:26
+lake,dec 6,49:29
+tunnel, dec 20,1:59:26
+b2,dec 30,2:27
+
+#============ 2021 ==============
+
+#----jan 2021----
+b2,2021 jan 4,2:24:35
+lake,jan 6,50:07
+tunnel,jan 8,1:52:31
+b2,jan 12,2:13:17
+great,jan 15,1:16:26
+great,jan 17,1:11:26
+b2,jan 19,2:13:01
+lake,jan 22,49:08
