@@ -3,7 +3,7 @@ stoke
 
 ## Installing
 
-You will need Python 3 and the R programming language installed.
+You will need the languages ruby and R installed.
 
 ## Basic use
 
