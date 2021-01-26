@@ -14,8 +14,10 @@ My own actual routes and logs are included in the git repository and can be used
 
 The y axis of the graph is in units of millikipchoges.
 1 kipchoge is defined as the power output per unit body mass required to run 1 marathon in 2 hours.
-It's equivalent to about 21 watt/kg. (Cyclists seem to prefer talking about mechanical work done on
-the pedals, in which case an elite athlete puts out about 5 watt/kg.)
+It's equivalent to about 21 watt/kg (Minetti et al., "Energy cost of walking and running at extreme uphill and downhill slopes,"
+https://sci-hub.do/10.1152/japplphysiol.01177.2001 ).
+For comparison, cyclists seem to prefer talking about mechanical work done on
+the pedals, in which case an elite athlete puts out about 5 watt/kg. 
 
 The climb factor (CF) is a percentage by which the energy required for a certain run exceeds what it
 would have been if the run had been flat. Climb factors can be determined using my script kcals.
